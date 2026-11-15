@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use MORQ, please cite the dataset and associated article."
+type: dataset
+title: "MORQ: Multimodal Organic Reaction Questions for evaluating language and vision-language models"
+authors:
+  - family-names: "Dong"
+    given-names: "Jiaqi"
+    email: "jiaqi1.24@intl.zju.edu.cn"
+    affiliation: "International Campus, Zhejiang University, Haining, China"
+  - family-names: "Zhou"
+    given-names: "Chenyi"
+    email: "chenyi.22@intl.zju.edu.cn"
+    affiliation: "International Campus, Zhejiang University, Haining, China"
+  - family-names: "Liu"
+    given-names: "Ansheng"
+    email: "ansheng.25@intl.zju.edu.cn"
+    affiliation: "International Campus, Zhejiang University, Haining, China"
+  - family-names: "Zhang"
+    given-names: "Qiang"
+    email: "qiang.zhang.cs@zju.edu.cn"
+    affiliation: "International Campus, Zhejiang University, Haining, China"
+version: "1.0.0"
+doi: "10.5281/zenodo.24243813"
+license: CC-BY-4.0
+repository-code: "https://github.com/jackydd2005/MORQ"
+url: "https://doi.org/10.5281/zenodo.24243813"
+keywords:
+  - organic reactions
+  - multimodal benchmark
+  - vision-language models
+  - SMILES
+  - reaction reasoning
+  - structured reconstruction

@@ -1,0 +1,6 @@
+name: morq-release
+channels:
+  - conda-forge
+dependencies:
+  - "python>=3.11,<3.14"
+  - rdkit=2025.09.3

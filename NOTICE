@@ -1,0 +1,38 @@
+MORQ release notice
+
+1. Public textbook stimuli
+
+The 197 files named data/assets/images/org_*_redrawn.png were generated
+independently from structured reaction records. The generator did not read or
+reuse pixels from the historical textbook images. These public redraws are
+included in the CC BY 4.0 grant in LICENSE.
+
+2. Historical stimuli and results
+
+Internal historical textbook images are not distributed and are not licensed
+by this package. Prediction rows generated from those images are also excluded.
+The released textbook results comprise 591 predictions measured on the public
+redraws for three models available at rerun time. Three unavailable models were
+not replaced by successor or different models.
+
+3. Source facts and identifiers
+
+Chemical facts, names, identifiers, and bibliographic source labels may not be
+subject to copyright. CC BY 4.0 applies only to rights that the MORQ authors
+are authorized to license and does not restrict lawful uses that do not
+require permission.
+
+4. Third-party names and services
+
+Product names, model names, provider names, trademarks, PubChem identifiers,
+and other third-party designations remain the property of their respective
+owners. Their descriptive appearance in the package does not imply
+endorsement or a separate trademark or patent license.
+
+5. Citation metadata
+
+The complete author list and preferred dataset citation are recorded in
+CITATION.cff. The public repository is https://github.com/jackydd2005/MORQ.
+The version-specific Zenodo DOI 10.5281/zenodo.24243813 is reserved for
+version 1.0.0. The Zenodo record remains an unpublished draft, so no formal
+release date is asserted in this package.

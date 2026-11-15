@@ -1,0 +1,2 @@
+# Preserve the exact release bytes recorded in metadata/checksums.sha256.
+* -text
