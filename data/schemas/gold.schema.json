@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MORQ non-textbook reference-answer record",
+  "type": "object",
+  "required": [
+    "id",
+    "org",
+    "type",
+    "gold_value",
+    "answer_kind",
+    "scoring_profile"
+  ],
+  "properties": {
+    "id": {"type": "integer"},
+    "org": {"type": "string", "pattern": "^org_[0-9]+$"},
+    "type": {"type": "string"},
+    "gold_value": {"type": "string", "minLength": 1},
+    "answer_kind": {"enum": ["mcq_option", "smiles"]},
+    "scoring_profile": {"enum": ["mcq_exact", "rdkit_normalized_smiles"]}
+  },
+  "additionalProperties": false
+}

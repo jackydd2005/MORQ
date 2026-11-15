@@ -1,0 +1,47 @@
+{
+  "scope": "Six-model non-textbook baseline plus a three-model public-redraw textbook rerun.",
+  "textbook_stimulus_version": "public_redraw_v1",
+  "textbook_stimulus_note": "The 591 released textbook predictions were measured on the distributed public redraws. Three originally requested models were unavailable at the rerun endpoint and were not substituted.",
+  "endpoint_interface": "OpenAI-compatible chat-completions",
+  "system_prompt": "You are an expert organic chemist. Your task is to answer organic chemistry questions from the provided text, images, reaction schemes, molecular structures, and labels. Always provide your thinking process.\nFirst, provide a concise chemical rationale in ordinary text. Focus on the key functional group transformations, reaction conditions, selectivity, stereochemistry, structural features, and mechanistic plausibility when they are relevant to the question.\nThen provide exactly one XML-style answer block in the following format: <ANS>...</ANS>.\nThe content inside the <ANS> tags must contain ONLY the final answer required by the question. Do NOT put any extra text inside the <ANS> tags. Do NOT write anything after the closing </ANS> tag.",
+  "request_construction": {
+    "messages": "system prompt followed by the question row's user_prompt",
+    "image_input": "for non-empty image_path, Base64-encode the released asset and submit it as image_url with MIME type inferred from its extension; otherwise submit text only",
+    "model_request_identifiers": [
+      "claude-opus-4-6",
+      "claude-opus-4-8",
+      "gpt-4o",
+      "gpt-5.2",
+      "vertex_ai.gemini-3.1-pro-preview",
+      "vertex_ai.gemini-3.5-flash"
+    ]
+  },
+  "execution": {
+    "maximum_concurrency": 15,
+    "maximum_attempts_per_request": 3,
+    "timeout_seconds": 180,
+    "retry_behavior": "Retryable transport failures wait 10 s; HTTP 429 and selected server errors use model-runner-specific backoff before the next attempt.",
+    "gemini_explicit_fields": {
+      "temperature": 0.0,
+      "reasoning_effort": "low"
+    },
+    "gpt_and_claude_sampling_fields": "Not explicitly set; endpoint defaults applied."
+  },
+  "public_redraw_rerun": {
+    "prediction_count": 591,
+    "models": [
+      "claude-opus-4-8",
+      "gpt-4o",
+      "gpt-5.2"
+    ],
+    "unavailable_requested_models": [
+      "claude-opus-4-6",
+      "vertex_ai.gemini-3.1-pro-preview",
+      "vertex_ai.gemini-3.5-flash"
+    ],
+    "endpoint_interface": "OpenAI-compatible chat-completions",
+    "maximum_concurrency": 2,
+    "maximum_attempts_per_request": 4,
+    "timeout_seconds": 240
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MORQ question record",
+  "type": "object",
+  "required": [
+    "id",
+    "org",
+    "type",
+    "user_prompt"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "org": {
+      "type": "string",
+      "pattern": "^org_[0-9]+$"
+    },
+    "type": {
+      "type": "string"
+    },
+    "user_prompt": {
+      "type": "string"
+    },
+    "image_path": {
+      "type": "string"
+    },
+    "stimulus_version": {
+      "type": "string"
+    },
+    "reference_truth_source": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

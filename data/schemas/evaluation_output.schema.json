@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scoring row",
+  "type": "object",
+  "required": [
+    "id",
+    "org",
+    "task_type",
+    "model",
+    "scorable",
+    "correct_primary"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "org": {
+      "type": "string"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "modality": {
+      "type": "string"
+    },
+    "answer_format": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "scorable": {
+      "type": "boolean"
+    },
+    "correct_primary": {},
+    "strict_correct": {},
+    "nostereo_correct": {},
+    "pred_invalid_count": {
+      "type": "integer"
+    },
+    "stimulus_version": {
+      "type": "string"
+    },
+    "stimulus_distributed": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

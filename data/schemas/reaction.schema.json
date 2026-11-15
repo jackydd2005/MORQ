@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MORQ reaction record file",
+  "type": "array",
+  "$defs": {
+    "molecule": {
+      "type": "object",
+      "properties": {
+        "name_zh": {
+          "type": "string"
+        },
+        "name_en": {
+          "type": "string"
+        },
+        "smiles": {
+          "type": "string"
+        },
+        "smiles_status": {
+          "type": "string",
+          "enum": [
+            "unavailable",
+            "manual_review_required"
+          ],
+          "description": "Optional status used when smiles is empty."
+        },
+        "smiles_note": {
+          "type": "string"
+        },
+        "inchi": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "step": {},
+        "pubchem_cid": {},
+        "iupac_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "molecular_formula": {
+          "type": "string"
+        },
+        "molecular_weight": {}
+      },
+      "additionalProperties": true
+    }
+  },
+  "items": {
+    "type": "object",
+    "properties": {
+      "reactants": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/molecule"
+        }
+      },
+      "products": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/molecule"
+        }
+      },
+      "reagents": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/molecule"
+        }
+      },
+      "reaction_conditions": {
+        "type": "array"
+      },
+      "yield": {},
+      "description": {
+        "type": "string"
+      },
+      "source": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "reactants",
+      "products",
+      "reagents",
+      "reaction_conditions",
+      "source"
+    ],
+    "additionalProperties": true
+  }
+}
