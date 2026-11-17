@@ -11,9 +11,11 @@ included in the CC BY 4.0 grant in LICENSE.
 
 Internal historical textbook images are not distributed and are not licensed
 by this package. Prediction rows generated from those images are also excluded.
-The released textbook results comprise 591 predictions measured on the public
-redraws for three models available at rerun time. Three unavailable models were
-not replaced by successor or different models.
+The released textbook results comprise 1,182 scored observations measured on
+the public redraws for all six evaluated models. Fifty-five terminal failures
+remain in the denominator as explicit zero-score observations: 52 empty Sonnet
+responses, one Sonnet invalid answer-wrapper output, one Argon invalid output
+without an <ANS> block, and one Argon provider timeout.
 
 3. Source facts and identifiers
 
