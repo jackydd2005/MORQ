@@ -31,6 +31,36 @@
       "gemini-3.8-flash": 0
     }
   },
+  "declared_request_fields": {
+    "claude-opus-4-8": {
+      "explicit_fields": {},
+      "note": "No sampling field is declared in the public protocol; endpoint defaults applied."
+    },
+    "claude-sonnet-5": {
+      "explicit_fields": {},
+      "note": "No sampling field was set in the replacement-panel runner; endpoint defaults applied."
+    },
+    "gpt-4o": {
+      "explicit_fields": {},
+      "note": "No sampling field is declared in the public protocol; endpoint defaults applied."
+    },
+    "gpt-5.2": {
+      "explicit_fields": {},
+      "note": "No sampling field is declared in the public protocol; endpoint defaults applied."
+    },
+    "gemini-4-argon": {
+      "explicit_fields": {
+        "temperature": 0.0,
+        "reasoning_effort": "low"
+      }
+    },
+    "gemini-3.8-flash": {
+      "explicit_fields": {
+        "temperature": 0.0,
+        "reasoning_effort": "low"
+      }
+    }
+  },
   "replacement_panel_execution": {
     "models": [
       "claude-sonnet-5",
@@ -38,12 +68,20 @@
       "gemini-3.8-flash"
     ],
     "maximum_concurrency": 24,
-    "timeout_seconds": 300,
+    "ordinary_request_timeout_seconds": 300,
+    "ordinary_maximum_attempts": 3,
     "completion_rule": "exactly one non-empty <ANS> block",
+    "retry_boundary": "Transient HTTP 408, 409, 429, 500, 502, 503 and 504 responses and transient network failures were eligible for bounded retries with exponential backoff. Permanent authentication, authorization, routing, model-identity and balance/quota failures stopped the applicable run.",
     "final_sonnet_recovery": {
       "stream": true,
       "max_tokens": 32768,
-      "maximum_attempts": 1
+      "maximum_attempts": 1,
+      "timeout_seconds": 1200,
+      "maximum_concurrency": 24
+    },
+    "argon_targeted_recovery": {
+      "note": "The two unresolved Argon observations received targeted streamed recovery. One exhausted a 16,384-token ceiling without an <ANS> block and one repeatedly returned provider timeout; both were terminalized under the stated failure policy."
     }
-  }
+  },
+  "provenance_boundary": "This file documents the shared request format and the verified replacement-panel execution settings. It does not reconstruct provider-side defaults, provider-internal model revisions, raw completions, or every intermediate retry used for the earlier retained Claude Opus, GPT-4o and GPT-5.2 baselines."
 }
