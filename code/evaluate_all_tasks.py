@@ -21,12 +21,12 @@ from typing import Any, Iterable
 
 
 MODELS = (
-    "claude-opus-4-6",
     "claude-opus-4-8",
+    "claude-sonnet-5",
     "gpt-4o",
     "gpt-5.2",
-    "vertex_ai.gemini-3.1-pro-preview",
-    "vertex_ai.gemini-3.5-flash",
+    "gemini-4-argon",
+    "gemini-3.8-flash",
 )
 TEXTBOOK_CATEGORIES = ("Missing Reactants", "Missing Products", "Missing Conditions")
 ROLE_FIELDS = ("reactants", "reagents", "products")
@@ -36,10 +36,7 @@ TARGETS = {
     "Missing Products": {("role", "products")},
     "Missing Conditions": {("condition", field) for field in CONDITION_FIELDS},
 }
-GEMINI_MODEL_FILES = {
-    "gemini-3.1-pro-preview.jsonl": "vertex_ai.gemini-3.1-pro-preview",
-    "gemini-3.5-flash.jsonl": "vertex_ai.gemini-3.5-flash",
-}
+REPLACEMENT_MODELS = ("claude-sonnet-5", "gemini-4-argon", "gemini-3.8-flash")
 METRIC_FIELDS = (
     "match", "gold_total", "pred_total", "extra_count", "missing_count", "pred_invalid_count"
 )
@@ -179,20 +176,15 @@ def iter_text_raw(raw_root: Path) -> Iterable[dict[str, Any]]:
                     }
 
 
-def iter_gemini_raw(raw_root: Path, question_index: dict[tuple[int, str], dict[str, Any]]) -> Iterable[dict[str, Any]]:
-    base = raw_root / "results" / "model_outputs" / "raw"
-    for filename, model in GEMINI_MODEL_FILES.items():
-        path = base / filename
-        if not path.exists():
-            continue
-        for row in read_jsonl(path):
-            key = (int(row["id"]), str(row["type"]))
-            question = question_index.get(key)
-            if question is None:
-                raise ValueError(f"Raw Gemini row does not resolve to a question: {key}")
+def iter_replacement_raw(raw_root: Path) -> Iterable[dict[str, Any]]:
+    base = raw_root / "results" / "model_outputs" / "replacement_v1_raw"
+    for model in REPLACEMENT_MODELS:
+        for path in (base / model).glob("*.json"):
+            row = json.loads(path.read_text(encoding="utf-8"))
             yield {
-                "id": key[0], "org": question["org"], "task_type": key[1], "model": model,
-                "raw": str(row.get("raw_output") or ""),
+                "id": int(row["question_id"]), "org": str(row["org"]),
+                "task_type": str(row["task_type"]), "model": model,
+                "raw": str(row.get("content") or ""),
                 "source": path.relative_to(raw_root).as_posix(),
             }
 
@@ -202,7 +194,7 @@ def build_format_sidecar(
 ) -> dict[tuple[str, int, str], dict[str, Any]] | None:
     if raw_root is None:
         return None
-    raw_rows = list(iter_text_raw(raw_root)) + list(iter_gemini_raw(raw_root, question_index))
+    raw_rows = list(iter_text_raw(raw_root)) + list(iter_replacement_raw(raw_root))
     raw_index: dict[tuple[str, int, str], dict[str, Any]] = {}
     for raw in raw_rows:
         key = (raw["model"], raw["id"], raw["task_type"])
@@ -344,26 +336,19 @@ def main() -> None:
     question_root = project_root if (project_root / "release" / "MORQ_release" / "data" / "questions" / "questions.jsonl").exists() else release
     questions = load_questions(question_root / "release" / "MORQ_release" if (question_root / "release" / "MORQ_release").exists() else question_root)
     rows = read_jsonl(predictions)
-    if len(rows) != 28179:
-        raise ValueError(f"Expected 28,179 scored rows, found {len(rows)}")
+    if len(rows) != 28770:
+        raise ValueError(f"Expected 28,770 scored rows, found {len(rows)}")
     if {str(row["model"]) for row in rows} != set(MODELS):
         raise ValueError("Scored snapshot model set does not match the six released models")
     if len({str(row["task_type"]) for row in rows}) != 15:
         raise ValueError("Scored snapshot does not contain 15 task types")
     rows_by_model = Counter(str(row["model"]) for row in rows)
-    expected_by_model = Counter({
-        "claude-opus-4-6": 4598,
-        "claude-opus-4-8": 4795,
-        "gpt-4o": 4795,
-        "gpt-5.2": 4795,
-        "vertex_ai.gemini-3.1-pro-preview": 4598,
-        "vertex_ai.gemini-3.5-flash": 4598,
-    })
+    expected_by_model = Counter({model: 4795 for model in MODELS})
     if rows_by_model != expected_by_model:
         raise ValueError(f"Scored snapshot model coverage mismatch: {dict(rows_by_model)}")
     textbook_rows = [row for row in rows if row.get("family") == "textbook_analysis"]
-    if len(textbook_rows) != 591 or {str(row.get("stimulus_version")) for row in textbook_rows} != {"public_redraw_v1"}:
-        raise ValueError("Expected 591 public_redraw_v1 textbook rows")
+    if len(textbook_rows) != 1182 or {str(row.get("stimulus_version")) for row in textbook_rows} != {"public_redraw_v1"}:
+        raise ValueError("Expected 1,182 public_redraw_v1 textbook rows")
     question_keys = {(int(row["id"]), str(row["task_type"])) for row in rows}
     if not question_keys.issubset(questions):
         raise ValueError("Scored snapshot contains question keys absent from questions.jsonl")
