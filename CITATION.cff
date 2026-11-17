@@ -24,6 +24,7 @@ authors:
     email: "qiang.zhang.cs@zju.edu.cn"
     affiliation: "International Campus, Zhejiang University, Haining, China"
 version: "1.0.0"
+date-released: 2026-11-18
 doi: "10.5281/zenodo.24243813"
 license: CC-BY-4.0
 repository-code: "https://github.com/jackydd2005/MORQ"

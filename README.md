@@ -2,13 +2,13 @@
 
 MORQ (Multimodal Organic Reaction Questions) is a manually constructed benchmark for evaluating language and vision-language models on organic-reaction understanding and structured reconstruction.
 
-Version 1.0.0 contains 197 reaction records and 4,795 questions across 15 task types. The complete release includes public reference answers, 1,580 linked image assets, 28,770 fixed scored observations, evaluation summaries, validation utilities and aggregate evidence from a version-mapped historical human spot check.
+Version 1.0.0, dated 2026-11-18, contains 197 reaction records and 4,795 questions across 15 task types. The complete release includes public reference answers, 1,580 linked image assets, 28,770 fixed scored observations, evaluation summaries, validation utilities and aggregate evidence from a version-mapped historical internal dataset-quality check.
 
 ## Dataset access
 
-The complete versioned dataset is prepared for deposition in Zenodo under the reserved DOI [10.5281/zenodo.24243813](https://doi.org/10.5281/zenodo.24243813). The DOI will resolve publicly after the Zenodo record is published.
+The complete versioned dataset is deposited in Zenodo under DOI [10.5281/zenodo.24243813](https://doi.org/10.5281/zenodo.24243813).
 
-This GitHub repository intentionally does not contain the 86.31 MB dataset archive. Zenodo is the version-of-record data host. Download these two files from the Zenodo record:
+This GitHub repository intentionally does not contain the 80.60 MB dataset archive. Zenodo is the version-of-record data host. Download these two files from the Zenodo record:
 
 - `MORQ-v1.0.0.zip`
 - `MORQ-v1.0.0.zip.sha256`
@@ -16,7 +16,7 @@ This GitHub repository intentionally does not contain the 86.31 MB dataset archi
 The expected SHA-256 value for the v1.0.0 ZIP is:
 
 ```text
-ea98114062206aa3af38f5e258e0317e8a643e8d68a2c2b70a5504e492a1a4cd
+4433b4b01568bfbf769a6a73877d56e0d164a903de0edb4f31b7f30d7811f949
 ```
 
 ## Repository contents
