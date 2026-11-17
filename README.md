@@ -2,7 +2,7 @@
 
 MORQ (Multimodal Organic Reaction Questions) is a manually constructed benchmark for evaluating language and vision-language models on organic-reaction understanding and structured reconstruction.
 
-Version 1.0.0, dated 2026-11-18, contains 197 reaction records and 4,795 questions across 15 task types. The complete release includes public reference answers, 1,580 linked image assets, 28,770 fixed scored observations, evaluation summaries, validation utilities and aggregate evidence from a version-mapped historical internal dataset-quality check.
+Version 1.0.0, dated 2026-11-17, contains 197 reaction records and 4,795 questions across 15 task types. The complete release includes public reference answers, 1,580 linked image assets, 28,770 fixed scored observations, evaluation summaries, validation utilities and aggregate evidence from a version-mapped historical internal dataset-quality check.
 
 ## Dataset access
 
@@ -16,7 +16,7 @@ This GitHub repository intentionally does not contain the 80.60 MB dataset archi
 The expected SHA-256 value for the v1.0.0 ZIP is:
 
 ```text
-4433b4b01568bfbf769a6a73877d56e0d164a903de0edb4f31b7f30d7811f949
+bb96273348927444322c52f6ea10b4231174f79157a9db4745c13a885518ef1c
 ```
 
 ## Repository contents
